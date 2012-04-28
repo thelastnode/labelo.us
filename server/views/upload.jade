@@ -1,3 +1,21 @@
 form(action='/upload', method='POST', enctype='multipart/form-data')
   input(type='file', name='image')
   input(type='submit')
+
+  #labels
+
+input(type='text')#label-input
+
+script(type='text/javascript')
+  $(function() {
+    var input = $('#label-input');
+    input.on('keypress', function(e) {
+      if (!(e.keyCode == 13 || e.keyCode == 32 || e.keyCode == 44)) return;
+      $('#labels').append($('<input>').attr('name', 'labels')
+                                      .attr('type', 'hidden')
+                                      .val(input.val()));
+      $('#labels').append($('<li>').text(input.val()));
+      input.val('');
+      e.preventDefault();
+    });
+  });

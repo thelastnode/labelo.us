@@ -9,7 +9,7 @@ var Image = new Schema({
     required: true,
   },
   labels: [{
-    type: String,
+    name: String,
     weight: Number,
   }],
 });

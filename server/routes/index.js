@@ -18,9 +18,18 @@ exports.post_upload = function(req, res, next) {
   fs.readFile(req.files.image.path, function(err, data) {
     if (err) return next(err);
 
+    var labels = (req.body.labels || []).map(function(x) {
+      return {
+        name: x,
+        weight: 1,
+      };
+    });
+
+    console.log(labels);
+
     var image = new models.Image({
       data: new Buffer(data),
-      labels: [],
+      labels: labels,
     });
 
     image.save(function(err) {
