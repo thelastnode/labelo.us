@@ -25,8 +25,6 @@ exports.post_upload = function(req, res, next) {
       };
     });
 
-    console.log(labels);
-
     var image = new models.Image({
       data: new Buffer(data),
       labels: labels,
