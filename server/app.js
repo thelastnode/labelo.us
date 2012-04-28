@@ -4,9 +4,14 @@
  */
 
 var express = require('express')
-  , routes = require('./routes');
+var mongoose = require('mongoose');
+
+var conf = require('./conf');
+var routes = require('./routes');
 
 var app = module.exports = express.createServer();
+
+mongoose.connect(conf.mongo);
 
 // Configuration
 
@@ -27,9 +32,7 @@ app.configure('production', function(){
   app.use(express.errorHandler());
 });
 
-// Routes
-
-app.get('/', routes.index);
+routes.registerOn(app);
 
 app.listen(3000, function(){
   console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
